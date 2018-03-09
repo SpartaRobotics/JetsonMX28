@@ -1,11 +1,11 @@
 # build an executable for JetsonMX28
 
 CC = g++
-CFLAGS = -g -Wall -Iinclude
+CFLAGS = -g -Wall -I../../include
 
-HDIR = include
-SDIR = src
-ODIR = src/obj
+HDIR = ../../include
+SDIR = ../../src
+ODIR = ../../src/obj
 
 TARGET = simpleMove
 
@@ -24,5 +24,13 @@ jetsonGPIO.o: $(SDIR)/jetsonGPIO.c	$(HDIR)/jetsonGPIO.h
 	$(CC) $(CFLAGS) -c $< -o $(ODIR)/$@
 
 
+target: $(TARGET)
+
+$(TARGET): $(TARGET).o JetsonMX28.o jetsonGPIO.o
+	$(CC) $(CFLAGS) $< $(ODIR)/JetsonMX28.o $(ODIR)/jetsonGPIO.o -o $@
+
 clean:
+	$(RM) -f core *.o $(TARGET)
+
+cleanall:
 		$(RM) -f core *.o $(TARGET) -f core $(ODIR)/*.o
