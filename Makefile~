@@ -25,4 +25,4 @@ jetsonGPIO.o: $(SDIR)/jetsonGPIO.c	$(HDIR)/jetsonGPIO.h
 
 
 clean:
-		$(RM) -f core *.o $(TARGET) -f core $(ODIR)/*.o
+		$(RM) -f core *.o $(TARGET)
