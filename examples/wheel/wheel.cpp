@@ -10,7 +10,7 @@
 #define ID 1        // ID for singl servo
 #define GPIO 1      // 1 for GPIO UART, 0 for USB UART
 
-#define SERVO 0  // Sets continous rotation mode
+#define ROTATION 1  // Sets continous rotation mode
 #define CW  0 		// Clockwise
 #define CCW 1 		// Counter Clockwise
 
@@ -26,27 +26,16 @@ int main()
 	control.beginUSB();
 #endif
     
-    control.setEndless(ID, SERVO);
+    control.setEndless(ID, ROTATION);
     
     for(int i = 0; i < 3; i++)
     {
-		control.moveSpeed(ID, 0, 1023);
-		usleep(2*SEC);
-		control.moveSpeed(ID, 1024, 100);
-		usleep(2*SEC);
-		control.moveSpeed(ID, 2048, 300);
-		usleep(2*SEC);
-		control.moveSpeed(ID, 3072, 256);
-		usleep(2*SEC);
-		control.moveSpeed(ID, 4095, 768);
-		usleep(2*SEC);
-		control.moveSpeed(ID, 3072, 256);
-		usleep(2*SEC);
-		control.moveSpeed(ID, 2048, 50);
-		usleep(2*SEC);
-		control.moveSpeed(ID, 1024, 512);
-		usleep(2*SEC);
-
+		control.turn(1, CW, 512);
+		usleep(3*SEC);
+		control.turn(1, CCW, 1020);
+		usleep(3*SEC);
+		control.turn(1, 0, 0); // Either clockwise or counter clockwise as long as speed is 0
+		usleep(3*SEC);
     }
     
     control.disconnect();

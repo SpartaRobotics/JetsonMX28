@@ -32,19 +32,19 @@ int main()
     {
 		control.moveSpeed(ID, 0, 1023);
 		usleep(2*SEC);
-		control.moveSpeed(ID, 1024, 100);
+		control.moveSpeed(ID, 1024, 768);
 		usleep(2*SEC);
-		control.moveSpeed(ID, 2048, 300);
-		usleep(2*SEC);
-		control.moveSpeed(ID, 3072, 256);
-		usleep(2*SEC);
-		control.moveSpeed(ID, 4095, 768);
+		control.moveSpeed(ID, 2048, 512);
 		usleep(2*SEC);
 		control.moveSpeed(ID, 3072, 256);
 		usleep(2*SEC);
-		control.moveSpeed(ID, 2048, 50);
+		control.moveSpeed(ID, 4095, 1023);
 		usleep(2*SEC);
-		control.moveSpeed(ID, 1024, 512);
+		control.moveSpeed(ID, 3072, 256);
+		usleep(2*SEC);
+		control.moveSpeed(ID, 2048, 512);
+		usleep(2*SEC);
+		control.moveSpeed(ID, 1024, 768);
 		usleep(2*SEC);
 
     }

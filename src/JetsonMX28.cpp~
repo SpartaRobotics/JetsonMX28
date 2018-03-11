@@ -281,7 +281,7 @@ int JetsonMX28::setEndless(unsigned char ID,bool Status)
 {
 
     if ( Status ) {	// for continous mode
-	    char MX_CCW_AL_LT = 0;
+	    //char MX_CCW_AL_LT = 0;
 	    Checksum = (~(ID + MX_GOAL_LENGTH + MX_WRITE_DATA + MX_CCW_ANGLE_LIMIT_L))&0xFF;
     
         memset(tx_buffer, 0, sizeof(tx_buffer) );
