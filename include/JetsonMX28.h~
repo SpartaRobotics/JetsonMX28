@@ -127,8 +127,6 @@ ORGANIZATION: Sparta Robotics
 #define MX_ACTION_CHECKSUM			250
 #define BROADCAST_ID                254
 #define MX_START                    255
-#define MX_CW_AL_L                  255 
-#define MX_CW_AL_H                  15
 #define MX_CCW_AL_L                 255 
 #define MX_CCW_AL_H                 15
 #define TIME_OUT                    10         

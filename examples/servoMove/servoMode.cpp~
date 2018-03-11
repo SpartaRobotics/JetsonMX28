@@ -8,7 +8,7 @@
 #define SEC 1000000 // 1 Second in micro second units for delay
 #define MSEC 1000	// 1 milli second in micro second units for delay
 #define ID 1        // ID for singl servo
-#define USBUART 0   // 1 for USB, 0 for GPIO UART 
+#define GPIO 1   // 1 for USB, 0 for GPIO UART 
 
 using namespace std;
 
@@ -16,7 +16,7 @@ int main()
 {
     JetsonMX28 control;
 
-#if UARTFLAG
+#if GPIO
     control.begin();
 #else 
 	control.beginUSB();
@@ -27,8 +27,27 @@ int main()
         control.move(ID,0);
         usleep(2*SEC);
         
-        control.move(ID,1000);
+        control.move(ID,256);
         usleep(2*SEC);
+        
+        control.move(ID,512);
+        usleep(2*SEC);
+        
+        control.move(ID,768);
+        usleep(2*SEC);
+        
+        control.move(ID,1023);
+        usleep(2*SEC);
+        
+        control.move(ID,768);
+        usleep(2*SEC);
+        
+        control.move(ID,512);
+        usleep(2*SEC);
+        
+        control.move(ID,256);
+        usleep(2*SEC);
+        
     }
     
     control.disconnect();
