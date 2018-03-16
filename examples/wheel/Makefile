@@ -36,4 +36,4 @@ clean:
 	$(RM) -f core *.o $(TARGET)
 
 cleanall:
-		$(RM) -f core *.o $(TARGET) -f core $(ODIR)/*.o
+		$(RM) -f core *.o $(ODIR)/*.o $(TARGET) $(SDIR)/*.cpp~ *.cpp~ $(HDIR)/*.h~

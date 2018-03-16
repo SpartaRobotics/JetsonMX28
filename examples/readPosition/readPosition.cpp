@@ -1,5 +1,5 @@
 /*
-    Example for moving the Dynamixel MX28-AT series servos
+    Example for reading position from the Dynamixel MX28-AT series servos
 */
 
 #include<iostream>
@@ -26,35 +26,16 @@ int main()
 
 	control.setEndless(ID, OFF); // Sets the servo to "Servo" mode
     
+    control.move(ID, 2048);
+    
     for(int i = 0; i < 3; i ++)
     {
-        control.move(ID,0);
+        cout << "POSITION: " << control.readPosition(ID) << endl;
         usleep(2*SEC);
-        
-        control.move(ID,1024);
-        usleep(2*SEC);
-        
-        control.move(ID,2048);
-        usleep(2*SEC);
-        
-        control.move(ID,3072);
-        usleep(2*SEC);
-        
-        control.move(ID,4095);
-        usleep(2*SEC);
-        
-        control.move(ID,3072);
-        usleep(2*SEC);
-        
-        control.move(ID,2048);
-        usleep(2*SEC);
-        
-        control.move(ID,1024);
-        usleep(2*SEC);
-        
     }
     
     control.disconnect();
+    
     return 0;
 }
 

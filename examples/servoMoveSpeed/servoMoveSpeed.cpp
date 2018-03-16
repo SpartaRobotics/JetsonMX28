@@ -8,7 +8,7 @@
 #define SEC 1000000 // 1 Second in micro second units for delay
 #define MSEC 1000	// 1 milli second in micro second units for delay
 #define ID 1        // ID for singl servo
-#define GPIO 1      // 1 for GPIO UART, 0 for USB UART
+#define GPIO 0   	// 1 for GPIO, 0 for USB
 
 #define SERVO 0  // Sets continous rotation mode
 #define CW  0 		// Clockwise

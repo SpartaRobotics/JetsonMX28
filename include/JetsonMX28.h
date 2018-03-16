@@ -155,8 +155,8 @@ private:
     struct termios options;
     
 	jetsonGPIO data; // directional pin
-	unsigned char tx_buffer[255];
-	unsigned char rx_buffer[255];
+	unsigned char tx_buffer[14];
+	unsigned char rx_buffer[8];
     
 	unsigned char Checksum; 
 	unsigned char Direction_Pin;

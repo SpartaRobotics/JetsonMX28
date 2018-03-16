@@ -95,7 +95,8 @@ void JetsonMX28::beginUSB()
 void JetsonMX28::disconnect()
 {
     close(uart0_filestream);
-    printf("CLOSED ID[%d]. \n", uart0_filestream);
+    //printf("CLOSED ID[%d]. \n", uart0_filestream);
+    printf("DISCONNECTED!!! \n");
 }
 
 int JetsonMX28::reset(unsigned char ID)
@@ -1389,7 +1390,5 @@ int JetsonMX28::bytesToRead()
 	ioctl(uart0_filestream, FIONREAD, &bytes);
     return bytes;
 }
-
-
 
 
