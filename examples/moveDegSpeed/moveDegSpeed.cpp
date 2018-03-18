@@ -1,5 +1,5 @@
 /*
-    Example for moving the Dynamixel MX28-AT series servos
+    Example for moving at variable speeds on the Dynamixel MX28-AT series servos
     
 	Serial:
 	GPIO UART: "/dev/ttyTHS0" "/dev/ttyTHS1" "/dev/ttyTHS2"
@@ -15,8 +15,10 @@
 	gpio165 or 165,    // J3A2 - Pin 55
 	gpio166 or 166     // J3A2 - Pin 58
 	
-	*Moves the servo to the selected position at max speed
-		Mx28.move(ID, 0->4095): 0->360 degrees
+	*Moves the servo to the selected position (in degrees) at variable speed
+	Position (180 to 0) moves on the left, 0 stops in the middle, (0 to -180) moves to the right
+		Mx28.moveSpeedDeg(ID, -180 to 180, 0->4095): 0->360 degrees
+		
 */
 
 #include<iostream>
@@ -43,28 +45,43 @@ int main()
     
     for(int i = 0; i < 3; i ++)
     {
-        control.move(ID,0);
+    	control.moveSpeedDeg(ID, 180, 1023);
         usleep(2*SEC);
         
-        control.move(ID,1024);
+        control.moveSpeedDeg(ID, 150, 1023);
         usleep(2*SEC);
         
-        control.move(ID,2048);
+        control.moveSpeedDeg(ID, 120, 768);
         usleep(2*SEC);
         
-        control.move(ID,3072);
+        control.moveSpeedDeg(ID, 90, 512);
         usleep(2*SEC);
         
-        control.move(ID,4095);
+        control.moveSpeedDeg(ID, 60, 256);
         usleep(2*SEC);
         
-        control.move(ID,3072);
+        control.moveSpeedDeg(ID, 30, 128);
         usleep(2*SEC);
         
-        control.move(ID,2048);
+        control.moveSpeedDeg(ID, 0, 0);
         usleep(2*SEC);
         
-        control.move(ID,1024);
+        control.moveSpeedDeg(ID, -30, 128);
+        usleep(2*SEC);
+        
+        control.moveSpeedDeg(ID, -60, 256);
+        usleep(2*SEC);
+        
+        control.moveSpeedDeg(ID, -90, 512);
+        usleep(2*SEC);
+        
+        control.moveSpeedDeg(ID, -120, 768);
+        usleep(2*SEC);
+        
+        control.moveSpeedDeg(ID, -150, 1023);
+        usleep(2*SEC);
+        
+        control.moveSpeedDeg(ID, -180, 1023);
         usleep(2*SEC);
         
     }

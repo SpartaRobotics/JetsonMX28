@@ -1,4 +1,4 @@
-# build an executable for JetsonMX28
+# build an executable for JetsonAX12
 
 CC = g++
 CFLAGS = -g -Wall -I../../include
@@ -10,7 +10,7 @@ ODIR = ../../src/obj
 LMX28 = JetsonMX28
 LGPIO = jetsonGPIO
 
-TARGET = readPosition
+TARGET = moveDeg
 
 all: $(TARGET)
 
@@ -36,4 +36,4 @@ clean:
 	$(RM) -f core *.o $(TARGET)
 
 cleanall:
-		$(RM) -f core *.o $(ODIR)/*.o $(TARGET) $(SDIR)/*.cpp~ *.cpp~ $(HDIR)/*.h~
+		$(RM) -f core *.o $(ODIR)/*.o $(TARGET) $(SDIR)/*.cpp~ *.cpp~ $(HDIR)/*.h~ 

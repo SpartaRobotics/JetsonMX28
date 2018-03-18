@@ -15,8 +15,10 @@
 	gpio165 or 165,    // J3A2 - Pin 55
 	gpio166 or 166     // J3A2 - Pin 58
 	
-	*Moves the servo to the selected position at max speed
-		Mx28.move(ID, 0->4095): 0->360 degrees
+	*Moves the servo to the selected position (in degrees) at max speed
+	Position (150 to 0) moves on the left, 0 stops in the middle, (0 to -150) moves to the right
+		Mx28.moveDeg(ID, -180 to 180): 0->360 degrees
+		
 */
 
 #include<iostream>
@@ -43,28 +45,43 @@ int main()
     
     for(int i = 0; i < 3; i ++)
     {
-        control.move(ID,0);
+    	control.moveDeg(ID,180);
         usleep(2*SEC);
         
-        control.move(ID,1024);
+        control.moveDeg(ID,150);
         usleep(2*SEC);
         
-        control.move(ID,2048);
+        control.moveDeg(ID,120);
         usleep(2*SEC);
         
-        control.move(ID,3072);
+        control.moveDeg(ID,90);
         usleep(2*SEC);
         
-        control.move(ID,4095);
+        control.moveDeg(ID,60);
         usleep(2*SEC);
         
-        control.move(ID,3072);
+        control.moveDeg(ID,30);
         usleep(2*SEC);
         
-        control.move(ID,2048);
+        control.moveDeg(ID,0);
         usleep(2*SEC);
         
-        control.move(ID,1024);
+        control.moveDeg(ID,-30);
+        usleep(2*SEC);
+        
+        control.moveDeg(ID,-60);
+        usleep(2*SEC);
+        
+        control.moveDeg(ID,-90);
+        usleep(2*SEC);
+        
+        control.moveDeg(ID,-120);
+        usleep(2*SEC);
+        
+        control.moveDeg(ID,-150);
+        usleep(2*SEC);
+        
+        control.moveDeg(ID,-180);
         usleep(2*SEC);
         
     }

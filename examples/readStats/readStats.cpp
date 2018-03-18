@@ -1,5 +1,5 @@
 /*
-    Example for moving in continous rotation mode on the Dynamixel MX28-AT series servos
+    Example for reading to the Dynamixel MX28-AT series servos
     
 	Serial:
 	GPIO UART: "/dev/ttyTHS0" "/dev/ttyTHS1" "/dev/ttyTHS2"
@@ -15,15 +15,14 @@
 	gpio165 or 165,    // J3A2 - Pin 55
 	gpio166 or 166     // J3A2 - Pin 58
 	
-	*Rotates Clockwise
-		Mx28.turn(ID, RIGHT, 0->1020) : Limit is 1020
-		
-	*Rotates Counter-Clockwise
-		Mx28.turn(ID, LEFT,  0->900) : Limit is 900 (Anything above this for CCW may not work)
-	
-	*Halts at current position
-		Mx28.turn(ID, OFF, 0) : Stops the servo
+	*Reads the temperature of the selected servo
+		Mx28.readPosition(ID)	: reads the position
+		Mx28.readTemperature(ID): reads the temperature
+		Mx28.readVoltage(ID)	: reads the voltage
+		Mx28.readSpeed(ID)		: reads the speed
+		Mx28.readLoad(ID)		: reads the load
 */
+
 #include<iostream>
 #include "JetsonMX28.h"
 
@@ -43,20 +42,23 @@ int main()
 #else 
 	control.begin("/dev/ttyTHS0", B1000000, 166);
 #endif
+
+	control.setEndless(ID, OFF); // Sets the servo to "Servo" mode
     
-    control.setEndless(ID, ON);
+    control.move(ID, 2048);
     
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 3; i ++)
     {
-		control.turn(ID, RIGHT, 1020);
-		usleep(3*SEC);
-		control.turn(ID, LEFT, 512);
-		usleep(3*SEC);
-		control.turn(ID, OFF, OFF); // Either clockwise or counter clockwise as long as speed is 0
-		usleep(3*SEC);
-    }    
+        cout << "POSITION: " << control.readPosition(ID) << endl;
+        cout << "TEMPERATURE: " << control.readTemperature(ID) << endl;
+        cout << "VOLTAGE: " << control.readVoltage(ID) << endl;
+        cout << "SPEED: " << control.readSpeed(ID) << endl;
+        cout << "LOAD: " << control.readLoad(ID) << endl << endl;
+        usleep(2*SEC);
+    }
     
     control.disconnect();
+    
     return 0;
 }
 

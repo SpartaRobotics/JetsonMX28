@@ -15,7 +15,7 @@
     
     TODO:
     - Fix Read functions to packets in order and to avoid faulty packets
-    - Fix Read to read data majority of the time
+    - Adjust for user input UART and baud rates
     
 ********************************************************************************************
 
@@ -119,10 +119,10 @@ ORGANIZATION: Sparta Robotics
 #define MX_LED_LENGTH               4
 #define MX_TORQUE_LENGTH            4
 #define MX_POS_LENGTH               4
-#define MX_GOAL_LENGTH              5
 #define MX_MT_LENGTH                5
 #define MX_PUNCH_LENGTH             5
 #define MX_SPEED_LENGTH             5
+#define MX_GOAL_LENGTH              5
 #define MX_GOAL_SP_LENGTH           7
 #define MX_ACTION_CHECKSUM			250
 #define BROADCAST_ID                254
@@ -136,7 +136,10 @@ ORGANIZATION: Sparta Robotics
 #define Tx_MODE                     1
 #define Rx_MODE                     0
 #define LOCK                        1
+#define CENTER						180
 
+#define TRANSMIT_ON(STATUS) if ((STATUS)) gpioSetValue(data, on)
+#define TRANSMIT_OFF(STATUS) if ((STATUS)) gpioSetValue(data,off)
 
 #include <iostream>
 #include <stdio.h>
@@ -154,7 +157,7 @@ private:
 
     struct termios options;
     
-	jetsonGPIO data; // directional pin
+	jetsonGPIO data;
 	unsigned char tx_buffer[14];
 	unsigned char rx_buffer[8];
     
@@ -169,7 +172,8 @@ private:
 	unsigned char Load_High_Byte;
 	unsigned char Load_Low_Byte;
 	
-	int uart0_filestream; // needed to initialize uart
+	int uart0_filestream;
+	int gpio_status;
 	int count;
 	int Read_Byte;
 	int Moving_Byte;
@@ -180,12 +184,10 @@ private:
 	int Temperature_Byte;
 	int Voltage_Byte;
 	int Error_Byte; 
-	  
-	//int read_error(void);
 
 public:
-    void begin();
-    void beginUSB();
+    void begin(const char *stream, speed_t baud, jetsonGPIO dataPin);
+    void begin(const char *stream, speed_t baud);
     void disconnect();
     
     int reset(unsigned char ID);
@@ -196,6 +198,8 @@ public:
     
     int move(unsigned char ID, int Position);
 	int moveSpeed(unsigned char ID, int Position, int Speed);
+	int moveDeg(unsigned char ID, int Degrees);
+	int moveSpeedDeg(unsigned char ID, int Degrees, int Speed);
 	int setEndless(unsigned char ID,bool Status);
 	int turn(unsigned char ID, bool SIDE, int Speed);
 	int moveRW(unsigned char ID, int Position);
@@ -230,5 +234,7 @@ public:
 	
     int bytesToRead();
 };
+
+extern JetsonMX28 Mx28;
 
 #endif
