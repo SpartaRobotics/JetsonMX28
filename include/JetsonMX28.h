@@ -137,6 +137,11 @@ ORGANIZATION: Sparta Robotics
 #define Rx_MODE                     0
 #define LOCK                        1
 #define CENTER						180
+#define FULL_SPEED					1020
+#define TRIQUARTER_SPEED			756
+#define HALF_SPEED					512
+#define QUARTER_SPEED				256
+#define STOP						0
 
 #define TRANSMIT_ON(STATUS) if ((STATUS)) gpioSetValue(data, on)
 #define TRANSMIT_OFF(STATUS) if ((STATUS)) gpioSetValue(data,off)
