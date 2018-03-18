@@ -17,8 +17,16 @@
 	
 	*Moves the servo to the selected position (in degrees) at variable speed
 	Position (180 to 0) moves on the left, 0 stops in the middle, (0 to -180) moves to the right
-		Mx28.moveSpeedDeg(ID, -180 to 180, 0->4095): 0->360 degrees
-		
+		Mx28.moveSpeedDeg(ID, Position, Speed):
+		@ID - ID of the servo
+		@Position - degrees from -180 to 180 with 0 in the middle
+		@Speed - speed to move from 0 to 1020 or can use the following constants:
+				FULL_SPEED = 1020
+				TRIQUARTER = 756
+				HALF_SPEED = 512
+				QUARTER_SPEED = 256
+				STOP = 0
+				
 */
 
 #include<iostream>
@@ -69,19 +77,19 @@ int main()
         control.moveSpeedDeg(ID, -30, 128);
         usleep(2*SEC);
         
-        control.moveSpeedDeg(ID, -60, 256);
+        control.moveSpeedDeg(ID, -60, QUARTER_SPEED);
         usleep(2*SEC);
         
-        control.moveSpeedDeg(ID, -90, 512);
+        control.moveSpeedDeg(ID, -90, HALF_SPEED);
         usleep(2*SEC);
         
-        control.moveSpeedDeg(ID, -120, 768);
+        control.moveSpeedDeg(ID, -120, TRIQUARTER_SPEED);
         usleep(2*SEC);
         
-        control.moveSpeedDeg(ID, -150, 1023);
+        control.moveSpeedDeg(ID, -150, FULL_SPEED);
         usleep(2*SEC);
         
-        control.moveSpeedDeg(ID, -180, 1023);
+        control.moveSpeedDeg(ID, -180, STOP);
         usleep(2*SEC);
         
     }
